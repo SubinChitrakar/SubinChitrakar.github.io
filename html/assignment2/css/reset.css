@@ -1,0 +1,17 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+} 
+.clearfix:after {
+  clear: both;
+}
+
+.main-container-wrapper{font-family: Arial;}
+ul {
+	list-style: none;
+}

@@ -1,0 +1,115 @@
+.container{
+    max-width: 100%;
+}
+
+.header-top {
+    background-color: #7DD9E8;
+}
+
+.header-top-contents {
+    padding-top: 19px;
+    padding-bottom: 4px;
+}
+
+.half-header ul{
+    float: left;
+    padding: 10px 0;
+}
+
+.half-header .menu-wrapper{
+    width: 80%;
+}
+
+.menu-wrapper img{
+    width: 100%;
+}
+
+.half-header .logo-wrapper{
+    float: left;
+    width: 50%;
+    padding: 40px 0;
+}
+
+.logo-wrapper img{
+    width: 100% ;
+}
+
+.blog-wrapper{
+    width: 100%;
+    padding-left: 5px;
+}
+
+.left-blog-column {
+    float: left;
+    width: 50%;
+}
+
+.right-blog-column {
+    float: right;
+    width: 50%;
+}
+
+@media only screen and (min-width: 768px){
+    .half-header .menu-wrapper{
+        width: 100%;
+    }
+
+    .menu-wrapper img{
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 1002px){
+    .main-container-wrapper {
+        min-width: 1002px;
+    }
+
+    .container {
+        max-width: 58.625em;
+        margin: 0 auto;
+    }
+
+    .logo-container{
+        width: 23.77399%;
+    }
+
+    .logo-container img{
+        width: 100%;
+    }
+
+    .search-wrapper {
+        width: 40.93817%;
+        float: left;
+        padding: 0 24px;
+    }
+
+    .user-wrapper {
+        float: right;
+        width: auto;
+        text-align: right;
+    }
+
+    .header-bottom {
+        background-color: #F5F5F5
+    }
+
+    .col3-left .left {
+        float: left;
+        width: 21.32196%;
+    }
+
+    .col3-left .main-content-wrapper {
+        float: right;
+        width: 76.54584%;
+    }
+
+    .main-content-wrapper .blog-wrapper {
+        float: left;
+        width: 72.14485%;
+    }
+
+    .main-content-wrapper .right {
+        float: right;
+        width: 24.51253%;
+    }
+}
