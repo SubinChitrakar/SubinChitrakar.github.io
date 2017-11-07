@@ -1,0 +1,100 @@
+.container {
+    width: 1175px;
+    margin: 0 auto;
+    padding: 25px 0 8px 0;
+}
+
+.inner-container{
+    width: 1165px;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    width: 210px;
+    padding: 3px 9px 9px 0;
+}
+
+.menu {
+    float: right;
+    text-align: left;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    float: left;
+}
+
+.lower-header .container{
+    padding-bottom: 44px;
+}
+
+.content-slider{
+    padding:6px 0;
+}
+
+.slider-heading h2{
+    float: left;
+    padding: 2px 0 0 0;
+    margin: 0 5px;
+}
+
+.slider-heading .arrows{
+    float: right;
+}
+
+.slider-bottom{
+    width: 1165px;
+    margin: 0 auto;
+}
+
+.project-description{
+    float: left;
+    width: 735px;
+}
+
+.project-details{
+    float: right;
+    width: 270px;
+    margin-right: 7px;
+}
+
+.project-details ul li .left{
+    float: left;
+    width: 130px;
+}
+.project-details ul li .right{
+    float: right;
+    width: 100px;
+    text-align: right;
+}
+
+.company-info{
+    float: left;
+    width: 370px;
+}
+
+.company-list{
+    float: left;
+    width: 170px;
+    margin-left: 35px;
+}
+
+.community-list{
+    float: left;
+    width: 170px;
+    margin-left: 35px;
+    margin-right: 20px;
+}
+
+.blog-list{
+    float: left;
+    text-align: left;
+    width: 365px;
+}
+
