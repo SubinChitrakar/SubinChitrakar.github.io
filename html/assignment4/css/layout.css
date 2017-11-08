@@ -1,0 +1,170 @@
+.container{
+    max-width: 100%;
+    margin: 0 30px;
+}
+.inner-container{
+    width: 99.14894%;
+    margin: 0 auto;
+}
+
+.logo {
+    float: left;
+    width: 18.02575%;
+    padding: 3px 9px 9px 0;
+}
+
+.menu {
+    float: right;
+    text-align: left;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    float: left;
+}
+
+.content-slider{
+    padding:6px 0;
+}
+
+.slider-heading h2{
+    float: left;
+    padding: 2px 0 0 0;
+    margin: 0 5px;
+}
+
+.slider-heading .arrows{
+    float: right;
+}
+
+.slider-bottom{
+    width: 99.14894%;
+    margin: 0 auto;
+}
+
+.project-description{
+    width: 100%;
+}
+
+.project-details{
+    width: 100%;
+    margin-top: 50px;
+}
+
+.project-details ul li .left{
+    float: left;
+    width: 50%;
+}
+.project-details ul li .right{
+    float: right;
+    width: 50%;
+}
+
+.related-projects{
+    margin-top: 50px;
+}
+
+.company-info{
+    width: 100%;
+}
+
+.company-list{
+    width: 100%;
+}
+
+.community-list{
+    margin-top: 40px;
+    width: 100%;
+}
+
+.blog-list{
+    margin: 40px 0;
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px){
+    .company-list{
+        width: 50%;
+        float: left;
+    }
+
+    .community-list{
+        width: 50%;
+        margin: 0;
+        float: left;
+    }
+
+    .blog-list{
+        margin: 230px 0 20px 0;
+        width: 60%;
+    }
+
+}
+
+@media only screen and (min-width: 1175px){
+    .container {
+        max-width: 73.4275em;
+        padding: 25px 0 8px 0;
+        margin: 0 auto;
+    }
+
+    .lower-header .container{
+        padding-bottom: 44px;
+    }
+
+    .project-description{
+        float: left;
+        width: 62.55319%;
+    }
+
+    .project-details{
+        float: right;
+        width: 22.97872%;
+        margin-right: 7px;
+    }
+
+    .project-details ul li .left{
+        float: left;
+        width: 48.14815%;
+    }
+    .project-details ul li .right{
+        float: right;
+        width: 37.03704%;
+        text-align: right;
+    }
+
+    .company-info{
+        float: left;
+        width: 31.75966%;
+    }
+
+    .company-list{
+        float: left;
+        width: 14.59227%;
+        margin-left: 35px;
+    }
+
+    .community-list{
+        float: left;
+        width: 14.59227%;
+        margin-left: 35px;
+        margin-right: 20px;
+    }
+
+    .blog-list{
+        float: left;
+        text-align: left;
+        width: 31.33047%;
+        margin: 0;
+    }
+}
+
+
+
+
+
