@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moving Car</title>
+
+    <style>
+        #mainWrapper {
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        .play-screen{
+            width: 400px;
+            height: 930px;
+            position: absolute;
+            background: url(home-screen.jpg) no-repeat;
+        }
+
+        .play-button{
+            position: absolute;
+            width: 96px;
+            height: 60px;
+            background: url(play-button.png) no-repeat;
+            top:400px;
+            left: 280px;
+        }
+
+        .score-card{
+            position: absolute;
+            z-index: 5;
+            width: 100px;
+            line-height: 20px;
+            text-align: center;
+            background: #231f20;
+            color: white;
+            top: 10px;
+            left: 10px;
+            border-radius: 5px;
+        }
+
+        .road {
+            position: absolute;
+            width: 400px;
+            height: 930px;
+            background: url(road.png) repeat-y;
+            overflow: hidden;
+        }
+
+        .car {
+            position: absolute;
+            width: 100px;
+            height: 200px;
+            background: url(car.png) no-repeat;
+            top: 720px;
+            left: 150px;
+        }
+
+        .obstacle {
+            position: absolute;
+            width: 100px;
+            height: 200px;
+            background: url(obstacle.png) no-repeat;
+            top: 10px;
+            left: 150px;
+        }
+
+        .explosion{
+            position: absolute;
+            width: 262px;
+            height: 130px;
+            background: url(explosion.png) no-repeat;
+        }
+
+        .rocket{
+            position:absolute;
+            width: 100px;
+            height: 37px;
+            background: url(missile.png) no-repeat;
+        }
+
+        .end-screen{
+            width: 400px;
+            height: 930px;
+            position: absolute;
+            background: url(game-over-screen.png) no-repeat;
+        }
+
+        .end-screen h2{
+            font-size: 50px;
+            margin-top: 200px;
+            text-align: center;
+            color: #f5deb3;
+        }
+
+        .end-screen .score{
+            text-align: center;
+            display: block;
+            color: white;
+            font-size: 25px;
+            margin-top: 25px;
+        }
+
+        .end-screen .score-number{
+            text-align: center;
+            display: block;
+            color: white;
+            font-size: 40px;
+            margin-top: 25px;
+        }
+
+        .end-screen .play-again-button{
+            margin: 25px 155px;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="mainWrapper">
+
+    <div id="world">
+    </div>
+</div>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

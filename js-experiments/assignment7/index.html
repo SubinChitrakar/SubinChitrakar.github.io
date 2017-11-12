@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Moving Car</title>
+
+    <style>
+        #main-wrapper{
+            width: 400px;
+            margin: 0 20px;
+        }
+
+        #main-wrapper1{
+            width: 400px;
+            margin: 0 500px;
+        }
+
+        .road{
+            position: absolute;
+            width: 400px;
+            height: 900px;
+            background:url(road.png) repeat-y;
+            overflow: hidden;
+        }
+
+        .car{
+            position: absolute;
+            width: 100px;
+            height: 200px;
+            background: url(car.png) no-repeat;
+            top:680px;
+            left: 150px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="main-wrapper">
+    <div id="world">
+    </div>
+</div>
+
+<div id="main-wrapper1">
+    <div id="world1">
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
