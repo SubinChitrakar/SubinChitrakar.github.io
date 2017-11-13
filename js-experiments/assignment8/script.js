@@ -71,7 +71,7 @@ var Car = function (parentElement) {
 /*Obstacle Class*/
 var Obstacle = function (parentElement) {
   this.obstacleX = 0;
-  this.obstacleY = 0;
+  this.obstacleY = -200;
   this.obstacleDX = 0;
   this.obstacleDY = 0;
   this.health = 2;
@@ -92,7 +92,13 @@ var Obstacle = function (parentElement) {
 
   this.moveObstacle = function () {
     this.obstacleY += 15;
-    this.obstacleElement.style.top = this.obstacleY + "px";
+
+    if (this.obstacleY == 1000) {
+      this.removeObstacle();
+    }
+    else {
+      this.obstacleElement.style.top = this.obstacleY + "px";
+    }
   };
 
   this.removeObstacle = function () {
@@ -123,7 +129,13 @@ var Rocket = function (roadElement, carElement) {
 
   this.updateRocket = function () {
     this.rocketY = this.rocketY - this.rocketDY;
-    this.rocketElement.style.top = this.rocketY + "px";
+
+    if (this.rocketY == (-50)) {
+      this.deleteRocket();
+    }
+    else {
+      this.rocketElement.style.top = this.rocketY + "px";
+    }
   };
 
   this.deleteRocket = function () {
@@ -191,6 +203,7 @@ var collisionCheck = function () {
         weaponList[j].rocketStatus = false;
         if (obstacleList[i].health == 0) {
           obstacleList[i].removeObstacle();
+          obstacleList.splice(obstacleList.indexOf(obstacleList[i]), 1);
           rocketHitEffect(obstacleLeft, obstacleTop);
         }
       }
@@ -201,8 +214,12 @@ var collisionCheck = function () {
 /*Update Rocket*/
 function moveRocket() {
   for (var i = 0; i < weaponList.length; i++) {
-    if (weaponList[i].rocketStatus) {
+    if ((weaponList[i].rocketY > -50) && (weaponList[i].rocketStatus)) {
       weaponList[i].updateRocket();
+    }
+    else {
+      moveStatus = true;
+      weaponList.splice(weaponList.indexOf(weaponList[i]), 1);
     }
   }
 }
@@ -262,6 +279,11 @@ var startScreen = function () {
 var main = function () {
   gameScenario = new World(mainBody);
   gameScenario.newCar.resetCar();
+  var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
+  var bulletTime = 0;
+  var bulletStatus = false;
+  var reloadStatus = false;
+
 
   var scoreCard = document.createElement("div");
   scoreCard.className = "score-card";
@@ -277,6 +299,12 @@ var main = function () {
       status++;
       gameScenario.newRoad.updateBackground();
 
+      if (bulletTime == 50) {
+        rocket.createRocket();
+        weaponList.push(rocket);
+        reloadStatus = true;
+      }
+
       document.onkeydown = function (event) {
         if (event.keyCode == 37) {
           gameScenario.newCar.moveCar("Left");
@@ -285,14 +313,19 @@ var main = function () {
           gameScenario.newCar.moveCar("Right");
         }
         if (event.keyCode == 32) {
-          var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
-          rocket.createRocket();
-          weaponList.push(rocket);
+          if (reloadStatus) {
+            bulletTime = 0;
+            reloadStatus = false;
+          }
         }
       };
-      moveRocket();
+
+      if(!reloadStatus){
+        moveRocket();
+      }
       updateObstacles();
       collisionCheck();
+      bulletTime++;
     }, 15);
   }
 };
@@ -306,7 +339,7 @@ var stopGame = function () {
 
 /*Stop Keys*/
 var stopKeys = function () {
-  document.onkeydown=function (event) {
+  document.onkeydown = function (event) {
     if (event.keyCode == 37) {
     }
     if (event.keyCode == 39) {
@@ -322,39 +355,39 @@ var endScreen = function () {
   endScreen.className = "end-screen";
   mainBody.appendChild(endScreen);
 
-  var gameoverText=document.createElement("h2");
-  gameoverText.innerHTML="GAME OVER";
+  var gameoverText = document.createElement("h2");
+  gameoverText.innerHTML = "GAME OVER";
   endScreen.appendChild(gameoverText);
 
-  var line=document.createElement("hr");
+  var line = document.createElement("hr");
   endScreen.appendChild(line);
-  var line2=document.createElement("hr");
+  var line2 = document.createElement("hr");
   endScreen.appendChild(line2);
 
-  var score=document.createElement("span");
-  score.className="score";
-  score.innerHTML="Your Score";
+  var score = document.createElement("span");
+  score.className = "score";
+  score.innerHTML = "Your Score";
   endScreen.appendChild(score);
 
-  var scoreNumber=document.createElement("span");
-  scoreNumber.className="score-number";
-  scoreNumber.innerHTML=counter;
+  var scoreNumber = document.createElement("span");
+  scoreNumber.className = "score-number";
+  scoreNumber.innerHTML = counter;
   endScreen.appendChild(scoreNumber);
 
   var playAgain = document.createElement("button");
   playAgain.className = "play-again-button";
-  playAgain.innerHTML="Play Again";
+  playAgain.innerHTML = "Play Again";
   endScreen.appendChild(playAgain);
 
-  var endLine=document.createElement("hr");
+  var endLine = document.createElement("hr");
   endScreen.appendChild(endLine);
-  var endLine2=document.createElement("hr");
+  var endLine2 = document.createElement("hr");
   endScreen.appendChild(endLine2);
 
   playAgain.onclick = function () {
-    explosion=false;
-    counter=-1;
-    status=0;
+    explosion = false;
+    counter = -1;
+    status = 0;
     var obstacleList = [];
     var weaponList = [];
     mainBody.removeChild(wrapper);
@@ -375,6 +408,7 @@ var counter = 0;
 var explosion = false;
 var game;
 var status = 0;
+var moveStatus = false;
 startScreen();
 
 
