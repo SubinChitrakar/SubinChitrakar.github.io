@@ -279,15 +279,24 @@ var startScreen = function () {
 var main = function () {
   gameScenario = new World(mainBody);
   gameScenario.newCar.resetCar();
-  var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
-  var bulletTime = 0;
-  var bulletStatus = false;
-  var reloadStatus = false;
-
-
   var scoreCard = document.createElement("div");
   scoreCard.className = "score-card";
   gameScenario.newRoad.backgroundElement.appendChild(scoreCard);
+
+  document.onkeydown = function (event) {
+    if (event.keyCode == 37) {
+      gameScenario.newCar.moveCar("Left");
+    }
+    if (event.keyCode == 39) {
+      gameScenario.newCar.moveCar("Right");
+    }
+    if (event.keyCode == 32) {
+      var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
+      rocket.createRocket();
+      weaponList.push(rocket);
+    }
+  };
+
   if (!explosion) {
     game = setInterval(function () {
       if (status == 67) {
@@ -299,33 +308,9 @@ var main = function () {
       status++;
       gameScenario.newRoad.updateBackground();
 
-      if (bulletTime == 50) {
-        rocket.createRocket();
-        weaponList.push(rocket);
-        reloadStatus = true;
-      }
-
-      document.onkeydown = function (event) {
-        if (event.keyCode == 37) {
-          gameScenario.newCar.moveCar("Left");
-        }
-        if (event.keyCode == 39) {
-          gameScenario.newCar.moveCar("Right");
-        }
-        if (event.keyCode == 32) {
-          if (reloadStatus) {
-            bulletTime = 0;
-            reloadStatus = false;
-          }
-        }
-      };
-
-      if(!reloadStatus){
-        moveRocket();
-      }
+      moveRocket();
       updateObstacles();
       collisionCheck();
-      bulletTime++;
     }, 15);
   }
 };
@@ -408,7 +393,6 @@ var counter = 0;
 var explosion = false;
 var game;
 var status = 0;
-var moveStatus = false;
 startScreen();
 
 
