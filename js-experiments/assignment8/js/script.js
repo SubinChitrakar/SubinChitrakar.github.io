@@ -11,6 +11,12 @@ var MIN_TOP = -50;
 var MAX_TOP = 1000;
 var INITIAL_OBSTACLE_TOP=-200;
 var OBSTACLE_SPEED=15;
+var OBSTACLE_HEALTH=2;
+var BULLET_NUMBER=10;
+var BONUS_HIT_POINTS=5;
+var OFFSET_ROCKET_LEFT=10;
+var OFFSET_ROCKET_TOP=20;
+var ROCKET_MOVEMENT=10;
 
 /*World Class*/
 var World = function (element) {
@@ -88,7 +94,7 @@ var Obstacle = function (parentElement) {
   this.obstacleY = INITIAL_OBSTACLE_TOP;
   this.obstacleDX = 0;
   this.obstacleDY = 0;
-  this.health = 2;
+  this.health = OBSTACLE_HEALTH;
   this.obstacleElement = "";
   this.backgroundElement = parentElement;
   var that = this;
@@ -123,7 +129,7 @@ var Rocket = function (roadElement, carElement) {
   this.rocketX = 0;
   this.rocketY = 0;
   this.rocketDX = 0;
-  this.rocketDY = 10;
+  this.rocketDY = ROCKET_MOVEMENT;
   this.rocketStatus = true;
   this.parentElement = roadElement;
   this.carElement = carElement;
@@ -134,7 +140,7 @@ var Rocket = function (roadElement, carElement) {
     this.rocketElement = document.createElement("div");
     this.rocketElement.className = "rocket";
     this.rocketX = this.carElement.offsetLeft;
-    this.rocketY = this.carElement.offsetTop + 20;
+    this.rocketY = this.carElement.offsetTop + OFFSET_ROCKET_TOP;
     this.rocketElement.style.left = this.rocketX + "px";
     this.rocketElement.style.top = this.rocketY + "px";
     this.parentElement.appendChild(this.rocketElement);
@@ -240,7 +246,7 @@ function moveRocket() {
 var crashEffect = function (positionX, positionY) {
   var crash = document.createElement("div");
   crash.className = "explosion";
-  crash.style.left = (positionX - 10) + "px";
+  crash.style.left = (positionX - OFFSET_ROCKET_LEFT) + "px";
   crash.style.top = positionY + "px";
   gameScenario.newRoad.backgroundElement.appendChild(crash);
   explosion = true;
@@ -251,14 +257,14 @@ var crashEffect = function (positionX, positionY) {
 var rocketHitEffect = function (positionX, positionY) {
   var rocketHit = document.createElement("div");
   rocketHit.className = "explosion";
-  rocketHit.style.left = (positionX - 10) + "px";
+  rocketHit.style.left = (positionX - OFFSET_ROCKET_LEFT) + "px";
   rocketHit.style.top = positionY + "px";
   gameScenario.newRoad.backgroundElement.appendChild(rocketHit);
   rocketHit.style.backgroundPosition = "0px " + "0px";
 
   var hitEffectDuration = setInterval(updateAnimate, 100);
   var hitEffectDurationCounter = 0;
-  counter += 5;
+  counter += BONUS_HIT_POINTS;
 
   function updateAnimate() {
     if (hitEffectDurationCounter >= 1) {
@@ -303,7 +309,7 @@ var main = function () {
       gameScenario.newCar.moveCar("RIGHT");
     }
     if (event.keyCode == KEY_CODE.SPACE) {
-      if(bulletCount<10 && bulletTime===0){
+      if(bulletCount<BULLET_NUMBER && bulletTime===0){
         var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
         rocket.createRocket();
         weaponList.push(rocket);
@@ -323,7 +329,7 @@ var main = function () {
       status++;
       gameScenario.newRoad.updateBackground();
 
-      if(bulletCount>=10){
+      if(bulletCount>=BULLET_NUMBER){
         bulletTime++;
       }
 
