@@ -232,14 +232,17 @@ var collisionCheck = function () {
 
 /*Update Rocket*/
 function moveRocket() {
+  var tempRocket=[];
   for (var i = 0; i < weaponList.length; i++) {
     if ((weaponList[i].rocketY > MIN_TOP) && (weaponList[i].rocketStatus)) {
       weaponList[i].updateRocket();
+      tempRocket[i]=weaponList[i];
     }
     else {
-      weaponList.splice(weaponList.indexOf(weaponList[i]), 1);
+      tempRocket[i]=null;
     }
   }
+  weaponList = filterArray(tempRocket);
 }
 
 /*Crash Effect*/
@@ -411,6 +414,16 @@ var endScreen = function () {
   }
 };
 
+/*Filter Array*/
+function filterArray(unsortedArray){
+  var tempSortedArray=[];
+  for(var i=0; i<unsortedArray.length;i++){
+    if(unsortedArray[i]!=null){
+      tempSortedArray.push(unsortedArray[i]);
+    }
+  }
+  return tempSortedArray;
+}
 
 /*====================================================================================================================*/
 
