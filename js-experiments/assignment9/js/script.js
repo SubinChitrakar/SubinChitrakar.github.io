@@ -107,7 +107,6 @@ class World {
         this.tempObstacleList[i]=this.obstacleList[i];
       }
       else {
-        this.obstacleList[i].removePipe();
         this.tempObstacleList[i]=null;
       }
     }
@@ -251,12 +250,10 @@ class flappyBird {
     if (direction === 'UP') {
       this.birdDY = BIRD_UP_MOVEMENT;
       this.birdY = this.birdY - this.birdDY;
-      this.birdElement.style.backgroundPositionX=BIRD_FLY_UP+'px';
     }
     else {
       this.birdDY = BIRD_DOWN_MOVEMENT;
       this.birdY = this.birdY + this.birdDY;
-      this.birdElement.style.backgroundPositionX=BIRD_FLY_DOWN+'px';
     }
     this.birdElement.style.top = this.birdY + 'px';
   }
@@ -321,11 +318,15 @@ class Pipe {
     this.pipeX = this.pipeX - this.pipeDX;
     this.pipeElementTop.style.left = this.pipeX + 'px';
     this.pipeElementBottom.style.left = this.pipeX + 'px';
+
+    if (this.pipeX <= END_LEFT) {
+      this.removePipe();
+    }
   }
 
   removePipe(){
-    this.parentElement.removeChild(this.pipeElementTop);
     this.parentElement.removeChild(this.pipeElementBottom);
+    this.parentElement.removeChild(this.pipeElementTop);
   }
 }
 /*============================Functions=======================================*/

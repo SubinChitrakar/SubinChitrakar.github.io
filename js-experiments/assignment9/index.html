@@ -33,7 +33,7 @@
 
         .score-card {
             position: absolute;
-            z-index: 5;
+            z-index: 20;
             width: 100px;
             line-height: 20px;
             text-align: center;
@@ -54,6 +54,7 @@
 
         .bird {
             position: absolute;
+            z-index: 10;
             width: 40px;
             height: 30px;
             left: 100px;
@@ -68,6 +69,7 @@
         .end-screen {
             width: 800px;
             height: 800px;
+            z-index: 15;
             position: absolute;
             background: url(images/game-over-screen.png) no-repeat;
         }
@@ -85,18 +87,21 @@
             color: white;
             font-size: 25px;
             margin-top: 25px;
+            z-index: 20;
         }
 
         .end-screen .score-number {
             text-align: center;
             display: block;
             color: white;
+            z-index: 20;
             font-size: 40px;
             margin-top: 25px;
         }
 
         .end-screen .play-again-button {
             margin: 25px 360px;
+            z-index: 20;
             padding: 10px;
         }
 
