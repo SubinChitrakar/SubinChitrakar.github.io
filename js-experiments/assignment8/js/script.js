@@ -1,3 +1,17 @@
+var KEY_CODE = {
+  SPACE: 32,
+  LEFT: 37,
+  RIGHT: 39
+};
+var CAR_HEIGHT = 720;
+var CAR_WIDTH = 150;
+var POSITIONS = [40, 150, 260];
+var MOVEMENT = 110;
+var MIN_TOP = -50;
+var MAX_TOP = 1000;
+var INITIAL_OBSTACLE_TOP=-200;
+var OBSTACLE_SPEED=15;
+
 /*World Class*/
 var World = function (element) {
   wrapper = document.createElement("div");
@@ -44,8 +58,8 @@ var Car = function (parentElement) {
   };
 
   this.resetCar = function () {
-    this.carY = 720;
-    this.carX = 150;
+    this.carY = CAR_HEIGHT;
+    this.carX = CAR_WIDTH;
     this.carElement.style.top = this.carY + "px";
     this.carElement.style.left = this.carX + "px";
   };
@@ -53,11 +67,11 @@ var Car = function (parentElement) {
   this.moveCar = function (direction) {
     this.carElement.style.top = this.carY + "px";
     this.carElement.style.left = this.carX + "px";
-    if (direction == "Right" && this.carX <= 150) {
-      this.dx = 110;
+    if (direction == "RIGHT" && this.carX <= CAR_WIDTH) {
+      this.dx = MOVEMENT;
     }
-    else if (direction == "Left" && this.carX >= 150) {
-      this.dx = -110
+    else if (direction == "LEFT" && this.carX >= CAR_WIDTH) {
+      this.dx = MOVEMENT * -1;
     }
     else {
       this.dx = 0;
@@ -71,7 +85,7 @@ var Car = function (parentElement) {
 /*Obstacle Class*/
 var Obstacle = function (parentElement) {
   this.obstacleX = 0;
-  this.obstacleY = -200;
+  this.obstacleY = INITIAL_OBSTACLE_TOP;
   this.obstacleDX = 0;
   this.obstacleDY = 0;
   this.health = 2;
@@ -80,9 +94,8 @@ var Obstacle = function (parentElement) {
   var that = this;
 
   this.createObstacle = function () {
-    var positions = [40, 150, 260];
-    var random = Math.floor(Math.random() * positions.length);
-    this.obstacleX = positions[random];
+    var random = Math.floor(Math.random() * POSITIONS.length);
+    this.obstacleX = POSITIONS[random];
 
     this.obstacleElement = document.createElement("div");
     this.obstacleElement.className = "obstacle";
@@ -91,9 +104,9 @@ var Obstacle = function (parentElement) {
   };
 
   this.moveObstacle = function () {
-    this.obstacleY += 15;
+    this.obstacleY += OBSTACLE_SPEED;
 
-    if (this.obstacleY == 1000) {
+    if (this.obstacleY == MAX_TOP) {
       this.removeObstacle();
     }
     else {
@@ -130,7 +143,7 @@ var Rocket = function (roadElement, carElement) {
   this.updateRocket = function () {
     this.rocketY = this.rocketY - this.rocketDY;
 
-    if (this.rocketY == (-50)) {
+    if (this.rocketY == MIN_TOP) {
       this.deleteRocket();
     }
     else {
@@ -155,7 +168,7 @@ var createObstacles = function () {
 /*Moving Obstacles*/
 var updateObstacles = function () {
   for (var i = 0; i < obstacleList.length; i++) {
-    if (obstacleList[i].obstacleY < 1000) {
+    if (obstacleList[i].obstacleY < MAX_TOP) {
       obstacleList[i].moveObstacle();
     }
     else {
@@ -214,11 +227,10 @@ var collisionCheck = function () {
 /*Update Rocket*/
 function moveRocket() {
   for (var i = 0; i < weaponList.length; i++) {
-    if ((weaponList[i].rocketY > -50) && (weaponList[i].rocketStatus)) {
+    if ((weaponList[i].rocketY > MIN_TOP) && (weaponList[i].rocketStatus)) {
       weaponList[i].updateRocket();
     }
     else {
-      moveStatus = true;
       weaponList.splice(weaponList.indexOf(weaponList[i]), 1);
     }
   }
@@ -284,16 +296,19 @@ var main = function () {
   gameScenario.newRoad.backgroundElement.appendChild(scoreCard);
 
   document.onkeydown = function (event) {
-    if (event.keyCode == 37) {
-      gameScenario.newCar.moveCar("Left");
+    if (event.keyCode == KEY_CODE.LEFT) {
+      gameScenario.newCar.moveCar("LEFT");
     }
-    if (event.keyCode == 39) {
-      gameScenario.newCar.moveCar("Right");
+    if (event.keyCode == KEY_CODE.RIGHT) {
+      gameScenario.newCar.moveCar("RIGHT");
     }
-    if (event.keyCode == 32) {
-      var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
-      rocket.createRocket();
-      weaponList.push(rocket);
+    if (event.keyCode == KEY_CODE.SPACE) {
+      if(bulletCount<10 && bulletTime===0){
+        var rocket = new Rocket(gameScenario.newRoad.backgroundElement, gameScenario.newCar.carElement);
+        rocket.createRocket();
+        weaponList.push(rocket);
+        bulletCount++;
+      }
     }
   };
 
@@ -307,6 +322,15 @@ var main = function () {
       }
       status++;
       gameScenario.newRoad.updateBackground();
+
+      if(bulletCount>=10){
+        bulletTime++;
+      }
+
+      if(bulletTime===100){
+        bulletCount=0;
+        bulletTime=0;
+      }
 
       moveRocket();
       updateObstacles();
@@ -325,11 +349,11 @@ var stopGame = function () {
 /*Stop Keys*/
 var stopKeys = function () {
   document.onkeydown = function (event) {
-    if (event.keyCode == 37) {
+    if (event.keyCode == KEY_CODE.LEFT) {
     }
-    if (event.keyCode == 39) {
+    if (event.keyCode == KEY_CODE.RIGHT) {
     }
-    if (event.keyCode == 32) {
+    if (event.keyCode == KEY_CODE.SPACE) {
     }
   }
 };
@@ -393,6 +417,9 @@ var counter = 0;
 var explosion = false;
 var game;
 var status = 0;
+
+var bulletCount=0;
+var bulletTime=0;
 startScreen();
 
 

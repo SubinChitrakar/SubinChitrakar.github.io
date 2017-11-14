@@ -64,7 +64,7 @@ var World=function () {
             var ant = document.createElement("div");
             ant.style.position = "absolute";
             var antImage = document.createElement("IMG");
-            antImage.setAttribute("src", "ant.gif");
+            antImage.src='images/ant.gif';
             antImage.setAttribute("width", "50");
             antImage.setAttribute("height", "55");
             ant.appendChild(antImage);

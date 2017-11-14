@@ -2,31 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Moving Car</title>
+    <title>Flappy Bird</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
         #mainWrapper {
-            width: 400px;
+            width: 800px;
             margin: 0 auto;
         }
 
-        .play-screen{
-            width: 400px;
-            height: 930px;
+        .play-screen {
+            width: 800px;
+            height: 400px;
             position: absolute;
             background: url(images/home-screen.jpg) no-repeat;
         }
 
-        .play-button{
+        .play-button {
             position: absolute;
             width: 96px;
             height: 60px;
             background: url(images/play-button.png) no-repeat;
-            top:400px;
-            left: 280px;
+            top: 260px;
+            left: 450px;
         }
 
-        .score-card{
+        .score-card {
             position: absolute;
             z-index: 5;
             width: 100px;
@@ -39,61 +44,42 @@
             border-radius: 5px;
         }
 
-        .road {
+        .background {
             position: absolute;
-            width: 400px;
-            height: 930px;
-            background: url(images/road.png) repeat-y;
+            width: 800px;
+            height: 800px;
+            background: url(images/background.png) repeat-x;
             overflow: hidden;
         }
 
-        .car {
+        .bird {
             position: absolute;
-            width: 100px;
-            height: 200px;
-            background: url(images/car.png) no-repeat;
-            top: 720px;
-            left: 150px;
+            width: 40px;
+            height: 30px;
+            left: 100px;
+            background: url(images/flappy-splite.png) no-repeat;
         }
 
-        .obstacle {
+        .pipe {
             position: absolute;
-            width: 100px;
-            height: 200px;
-            background: url(images/obstacle.png) no-repeat;
-            top: -200px;
-            left: 150px;
+            background: url(images/pipe-body.png) repeat-y;
         }
 
-        .explosion{
-            position: absolute;
-            width: 262px;
-            height: 130px;
-            background: url(images/explosion.png) no-repeat;
-        }
-
-        .rocket{
-            position:absolute;
-            width: 100px;
-            height: 37px;
-            background: url(images/missile.png) no-repeat;
-        }
-
-        .end-screen{
-            width: 400px;
-            height: 930px;
+        .end-screen {
+            width: 800px;
+            height: 800px;
             position: absolute;
             background: url(images/game-over-screen.png) no-repeat;
         }
 
-        .end-screen h2{
+        .end-screen h2 {
             font-size: 50px;
-            margin-top: 200px;
+            margin-top: 20px;
             text-align: center;
             color: #f5deb3;
         }
 
-        .end-screen .score{
+        .end-screen .score {
             text-align: center;
             display: block;
             color: white;
@@ -101,7 +87,7 @@
             margin-top: 25px;
         }
 
-        .end-screen .score-number{
+        .end-screen .score-number {
             text-align: center;
             display: block;
             color: white;
@@ -109,16 +95,15 @@
             margin-top: 25px;
         }
 
-        .end-screen .play-again-button{
-            margin: 25px 155px;
+        .end-screen .play-again-button {
+            margin: 25px 360px;
             padding: 10px;
         }
-    </style>
 
+    </style>
 </head>
 <body>
 <div id="mainWrapper">
-
     <div id="world">
     </div>
 </div>
